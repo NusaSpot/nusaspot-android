@@ -27,4 +27,7 @@ interface UserApi {
     fun postOtp(
         @Body userRequest: UserRequest
     ):retrofit2.Call<OtpResponse>
+
+    @GET("api/profile")
+    fun getProfile(@Header("Authorization")authorization: String): retrofit2.Call<ProfilResponse>
 }

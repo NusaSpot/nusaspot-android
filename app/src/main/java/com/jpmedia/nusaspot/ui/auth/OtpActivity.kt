@@ -12,12 +12,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.jpmedia.nusaspot.ui.MainActivity
 import com.jpmedia.nusaspot.R
 import com.jpmedia.nusaspot.api.OtpResponse
 import com.jpmedia.nusaspot.api.Retro
 import com.jpmedia.nusaspot.api.UserApi
 import com.jpmedia.nusaspot.api.UserRequest
+import com.jpmedia.nusaspot.ui.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
