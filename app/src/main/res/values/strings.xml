@@ -23,7 +23,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="id" />
-    <string name="user_id">\n</string>
+    <string name="user_id">id</string>
+    <string name="detect">Detect</string>
 
 
 </resources>
