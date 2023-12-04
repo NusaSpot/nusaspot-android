@@ -3,59 +3,49 @@ package com.jpmedia.nusaspot.ui
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import com.bumptech.glide.Glide
-import com.jpmedia.nusaspot.R
-import com.jpmedia.nusaspot.api.DetectDetailResponse
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.jpmedia.nusaspot.adapter.DetailAdapter
 import com.jpmedia.nusaspot.api.Retro
 import com.jpmedia.nusaspot.api.UserApi
 import com.jpmedia.nusaspot.databinding.ActivityDetailDetectBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.jpmedia.nusaspot.model.DetailViewModelFactory
+import com.jpmedia.nusaspot.model.DetectDetailViewModel
+import com.jpmedia.nusaspot.ui.repository.DetailRepository
+
 
 class DetailDetectActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailDetectBinding
-    private lateinit var imageView : ImageView
-    private lateinit var detectIdTextView : TextView
+    private lateinit var detectDetailViewModel: DetectDetailViewModel
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var detailAdapter: DetailAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailDetectBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        imageView = binding.image
-        detectIdTextView = binding.detectId
-       val retro = Retro().getRetroClientInstance().create(UserApi::class.java)
+        val apiService = Retro().getRetroClientInstance().create(UserApi::class.java)
+        val detailRepository = DetailRepository(apiService)
+        recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        detailAdapter = DetailAdapter(this, emptyList())
+        recyclerView.adapter = detailAdapter
+        val spanCount = 2 // Jumlah kolom dalam grid
+        recyclerView.layoutManager = GridLayoutManager(this, spanCount)
 
+        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val authToken = sharedPreferences.getString("token", null)
         val detectId = intent.getStringExtra("DETECT_ID")
         if (!detectId.isNullOrEmpty()) {
-            val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-            val authToken = sharedPreferences.getString("token", null)
-            val call = retro.getDetailDetect(detectId, "Bearer $authToken")
-             call.enqueue(object : Callback<DetectDetailResponse> {
-                override fun onResponse(call: Call<DetectDetailResponse>, response: Response<DetectDetailResponse>) {
-                    if (response.isSuccessful) {
-                        val detailDetectResponse = response.body()
-                        if (!detailDetectResponse?.data.isNullOrEmpty()) {
-                            val firstItem = detailDetectResponse?.data?.get(0)
-                            Glide.with(this@DetailDetectActivity)
-                                .load(firstItem?.image)
-                                .into(imageView)
-                            detectIdTextView.text = firstItem?.detectId
-                        } else {
-                            Toast.makeText(this@DetailDetectActivity, "No data available", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        Toast.makeText(this@DetailDetectActivity, "Failed to fetch detail", Toast.LENGTH_SHORT).show()
-
-                    }
-                }
-                override fun onFailure(call: Call<DetectDetailResponse>, t: Throwable) {
-                    Toast.makeText(this@DetailDetectActivity, "Network error", Toast.LENGTH_SHORT).show()
-                    Log.e("DetailDetectActivity", "Network error", t)
-                }
+            // Inisialisasi ViewModel dengan menggunakan DetailRepository
+            detectDetailViewModel = ViewModelProvider(this, DetailViewModelFactory(detailRepository))
+                .get(DetectDetailViewModel::class.java)
+            detectDetailViewModel.fetchDetail(detectId, "Bearer $authToken".orEmpty())
+            detectDetailViewModel.detectDetailData.observe(this, { detailDataList ->
+                // Perbarui adapter RecyclerView dengan data terbaru
+                detailAdapter.updateData(detailDataList)
             })
         } else {
             Toast.makeText(this, "Invalid detectId", Toast.LENGTH_SHORT).show()

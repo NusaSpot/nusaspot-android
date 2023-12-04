@@ -45,14 +45,15 @@ class DetectActivity : AppCompatActivity() {
             detectAdapter.setOnItemClickListener { position ->
                 val clickedItem = detectAdapter.getItem(position)
 
-                if (clickedItem != null && !clickedItem.userId.isNullOrEmpty()) {
-
+                if (clickedItem?.id != null && clickedItem.id != 0) {
+                    // Mengganti dari userId ke id
                     val intent = Intent(this@DetectActivity, DetailDetectActivity::class.java)
-                    intent.putExtra("DETECT_ID", clickedItem.userId)
+                    intent.putExtra("DETECT_ID", clickedItem.id.toString()) // Mengonversi Int ke String
                     startActivity(intent)
                 } else {
                     Toast.makeText(this, "Invalid item", Toast.LENGTH_SHORT).show()
                 }
+
             }
         } else {
             Toast.makeText(this, "Token is null. Handle this case appropriately.", Toast.LENGTH_SHORT).show()

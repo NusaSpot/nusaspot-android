@@ -25,6 +25,7 @@
     <string name="id" />
     <string name="user_id">id</string>
     <string name="detect">Detect</string>
+    <string name="image_description" />
 
 
 </resources>

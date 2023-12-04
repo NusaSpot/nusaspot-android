@@ -36,7 +36,7 @@ class DetectAdapter(private var detectList: List<DetectDataItem>,  private val c
 
     override fun onBindViewHolder(holder: DetectViewHolder, position: Int) {
         val currentItem = detectList[position]
-        holder.idTextView.text = "ID: ${currentItem.id}"
+        holder.idTextView.text = "ID: ${currentItem.id?: "Unknown"}"
         holder.userIdTextView.text = "User ID: ${currentItem.userId}"
 
         holder.itemView.setOnClickListener {
