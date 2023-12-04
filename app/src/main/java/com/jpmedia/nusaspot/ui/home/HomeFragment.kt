@@ -1,6 +1,7 @@
 package com.jpmedia.nusaspot.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.jpmedia.nusaspot.databinding.FragmentHomeBinding
+import com.jpmedia.nusaspot.ui.DetectActivity
+
 
 class HomeFragment : Fragment() {
 
@@ -33,6 +36,11 @@ class HomeFragment : Fragment() {
             // Update tampilan dengan data pengguna yang diperoleh dari API
             val user = userResponse?.data
             binding.TextView.text = "Welcome, ${user?.name}"
+        }
+
+        binding.btnDetect.setOnClickListener {
+            val intent = Intent(requireContext(), DetectActivity::class.java)
+            startActivity(intent)
         }
 
         val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
