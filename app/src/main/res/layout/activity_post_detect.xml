@@ -1,0 +1,124 @@
+<!-- res/layout/activity_main.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.PostDetectActivity">
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:padding="13dp">
+
+        <ImageView
+            android:id="@+id/arrowBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="347dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Upload Image"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/topBar"
+        android:background="#AFA6A6"/>
+
+    <ImageView
+        android:id="@+id/previewImageView"
+        android:layout_width="336dp"
+        android:layout_height="229dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="16dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder_image" />
+
+    <TextView
+        android:id="@+id/uploadDesc"
+        android:layout_width="272dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/grey"
+        android:text="Silahkan scan atau makasukan gambar makananmu dari galeri"
+        android:textStyle="bold"
+        tools:ignore="NotSibling" />
+
+    <Button
+        android:id="@+id/detectButton"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/uploadDesc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        android:paddingStart="70dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/user_scan"
+        android:gravity="start|center_vertical"
+        android:text="Deteksi Makanan" />
+
+    <Button
+        android:id="@+id/galleryButton"
+        android:layout_width="298dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detectButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:paddingStart="40dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/gallery"
+        android:gravity="start|center_vertical"
+        android:background="@drawable/button"
+        android:text="Ambil Gambar dari Galeri" />
+
+
+    <Button
+        android:id="@+id/uploadButton"
+        android:layout_width="298dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/galleryButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button"
+        android:text="Unggah" />
+
+
+    <!--    &lt;!&ndash; Bottom Navigation &ndash;&gt;-->
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomNavigation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="#ffffff"-->
+<!--        app:labelVisibilityMode="labeled"-->
+<!--        app:menu="@menu/bottom_nav_menu"/>-->
+
+</RelativeLayout>

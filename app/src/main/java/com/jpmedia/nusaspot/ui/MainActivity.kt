@@ -7,7 +7,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.jpmedia.nusaspot.R
 
@@ -24,7 +23,6 @@ class MainActivity : AppCompatActivity(), LogoutListener {
         super.onCreate(savedInstanceState)
         binding = ActivityBottomNavBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
 
         if (!isUserLoggedIn()) {
             redirectWelcome()
@@ -32,15 +30,17 @@ class MainActivity : AppCompatActivity(), LogoutListener {
 
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_bottom_nav)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_user
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.navigation_home, R.id.navigation_deteksi, R.id.navigation_notifications, R.id.navigation_user
+//            )
+//        )
+
+        // Comment out or remove the following line
+        // setupActionBarWithNavController(navController, appBarConfiguration)
+
         navView.setupWithNavController(navController)
     }
-
     override fun performLogout() {
         val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()

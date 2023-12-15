@@ -15,7 +15,7 @@ class DetectAdapter(private var detectList: List<DetectDataItem>,  private val c
     private var onItemClickListener: ((Int) -> Unit)? = null
 
     class DetectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val idTextView: TextView = itemView.findViewById(R.id.id)
+//        val idTextView: TextView = itemView.findViewById(R.id.id)
         val userIdTextView: TextView = itemView.findViewById(R.id.user_id)
     }
 
@@ -36,8 +36,8 @@ class DetectAdapter(private var detectList: List<DetectDataItem>,  private val c
 
     override fun onBindViewHolder(holder: DetectViewHolder, position: Int) {
         val currentItem = detectList[position]
-        holder.idTextView.text = "ID: ${currentItem.id?: "Unknown"}"
-        holder.userIdTextView.text = "User ID: ${currentItem.userId}"
+//        holder.idTextView.text = "ID: ${currentItem.id?: "Unknown"}"
+        holder.userIdTextView.text = "${currentItem.createdAt}"
 
         holder.itemView.setOnClickListener {
             onItemClickListener?.invoke(position)

@@ -1,16 +1,17 @@
 package com.jpmedia.nusaspot.ui.user
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.jpmedia.nusaspot.databinding.FragmentUserBinding
+import com.jpmedia.nusaspot.ui.EditProfilActivity
 import com.jpmedia.nusaspot.ui.auth.LogoutListener
 
 class UserFragment : Fragment() {
@@ -39,6 +40,11 @@ class UserFragment : Fragment() {
         binding.logoutButton.setOnClickListener {
             logoutListener.performLogout()
         }
+        binding.EditProfil.setOnClickListener {
+            val intent = Intent(requireContext(), EditProfilActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         userViewModel.profilData.observe(viewLifecycleOwner) { profilResponse ->
 
@@ -55,15 +61,13 @@ class UserFragment : Fragment() {
 
         }
 
-
-
         val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("token", null)
 
         if (authToken != null) {
             userViewModel.loadProfilData(authToken)
         }else{
-          //  Toast.makeText(requireContext(), "token kosong", Toast.LENGTH_SHORT).show()
+            //  Toast.makeText(requireContext(), "token kosong", Toast.LENGTH_SHORT).show()
         }
 
         return root

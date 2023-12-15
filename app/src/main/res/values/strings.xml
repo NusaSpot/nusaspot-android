@@ -5,9 +5,9 @@
     <string name="password">Password</string>
     <string name="message_login_page">Masukkan dulu datamu ya</string>
     <string name="title_login_page">Bersantap, Bersenang, Bersama Nusa Spot</string>
-    <string name="login">Login</string>
+<!--    <string name="login">Login</string>-->
     <string name="forgot_password">Lupa Password ?</string>
-    <string name="register">Daftar Akun</string>
+<!--    <string name="register">Daftar Akun</string>-->
     <string name="no_acount">Tidak Punya Akun ?</string>
 
 
@@ -26,6 +26,21 @@
     <string name="user_id">id</string>
     <string name="detect">Detect</string>
     <string name="image_description" />
+
+
+
+    <string name="register">REGISTER</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="signup_login_hint">Already have an account? Sign In</string>
+    <string name="login_signup_hint">Tidak punya akun? Daftar Akun</string>
+    <string name="login_signin_hint">Sudah punya akun? Masuk</string>
+    <string name="lupa_password">Lupa Password?</string>
+    <string name="login_name_hint">Name</string>
+    <string name="login_mobile_number_hint">Mobile Number</string>
+    <string name="login">Selamat Datang!</string>
+    <string name="logo_description">Logo</string>
+    <string name="konfirmasi_password">Konfirmasi Password</string>
 
 
 </resources>

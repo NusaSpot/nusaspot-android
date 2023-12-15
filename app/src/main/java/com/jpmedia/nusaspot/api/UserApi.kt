@@ -47,6 +47,21 @@ interface UserApi {
         @Header("Accept") accept: String = "application/json")
             : retrofit2.Call<DetectDetailResponse>
 
+    @GET("api/detect-start")
+    fun getDetectStart(
+        @Header("Authorization") authorization: String,
+        @Header("Accept") accept: String = "application/json"
+    ): retrofit2.Call<DetectStartResponse>
+
+    @Multipart
+    @POST("api/detect-detail-store/{detectId}")
+    fun postDetect(
+        @Header("Authorization") authorization: String,
+        @Part image : MultipartBody.Part,
+        @Path("detectId") detectId: String,
+        @Header("Accept") accept: String = "application/json"
+    ): retrofit2.Call<PostDetectResponse>
+
     @Multipart
     @POST("api/profile")
     fun postProfil(
@@ -56,4 +71,11 @@ interface UserApi {
         @Part("gender") gender: RequestBody,
         @Part("date_of_birth") date_of_birth: RequestBody,
     ):retrofit2.Call<ProfilResponse>
+
+    @GET("api/detect-finish/{detectId}")
+    fun detectFinish(
+        @Header("Authorization") authorization: String,
+        @Path("detectId") detectId: String,
+        @Header("Accept") accept: String = "application/json"
+    ):retrofit2.Call<FinishResponse>
 }
