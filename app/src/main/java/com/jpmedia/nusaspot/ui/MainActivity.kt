@@ -6,12 +6,10 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.jpmedia.nusaspot.R
-
 import com.jpmedia.nusaspot.databinding.ActivityBottomNavBinding
-import com.jpmedia.nusaspot.ui.auth.AuthActivity
+import com.jpmedia.nusaspot.ui.auth.LoginActivity
 import com.jpmedia.nusaspot.ui.auth.LogoutListener
 
 
@@ -47,7 +45,7 @@ class MainActivity : AppCompatActivity(), LogoutListener {
         editor.remove("token")
         editor.apply()
 
-        val intent = Intent(this, AuthActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -58,7 +56,7 @@ class MainActivity : AppCompatActivity(), LogoutListener {
     }
 
     private fun redirectWelcome() {
-        val intent = Intent(this, AuthActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }

@@ -2,21 +2,21 @@ package com.jpmedia.nusaspot.ui.auth
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.jpmedia.nusaspot.R
 import com.jpmedia.nusaspot.api.OtpResponse
 import com.jpmedia.nusaspot.api.Retro
 import com.jpmedia.nusaspot.api.UserApi
 import com.jpmedia.nusaspot.api.UserRequest
+import com.jpmedia.nusaspot.api.UserResponse
 import com.jpmedia.nusaspot.ui.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,12 +30,11 @@ class OtpActivity : AppCompatActivity() {
     private lateinit var inputCode4: EditText
     private lateinit var inputCode5: EditText
     private lateinit var inputCode6: EditText
-    private lateinit var resend :EditText
+    private lateinit var resend: TextView // Inisialisasi TextView untuk resend
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otp)
-        val inputMobile = findViewById<TextView>(R.id.inputMobile)
 
         inputCode1 = findViewById(R.id.inputCode1)
         inputCode2 = findViewById(R.id.inputCode2)
@@ -43,10 +42,16 @@ class OtpActivity : AppCompatActivity() {
         inputCode4 = findViewById(R.id.inputCode4)
         inputCode5 = findViewById(R.id.inputCode5)
         inputCode6 = findViewById(R.id.inputCode6)
+        resend = findViewById(R.id.textResendOTP) // Inisialisasi TextView untuk resend
+
+        val email = intent.getStringExtra("email")
+        resend.setOnClickListener {
+            if (email != null) {
+                requestOtp(email)
+            }
+        }
 
         btnSubmit = findViewById(R.id.btnSubmitOtp)
-
-
         btnSubmit.setOnClickListener {
             val inputCode1Text = inputCode1.text.toString().trim()
             val inputCode2Text = inputCode2.text.toString().trim()
@@ -94,9 +99,46 @@ class OtpActivity : AppCompatActivity() {
         })
     }
 
-    fun resendOTP(view: View) {
-        val toast = Toast.makeText(applicationContext, "Kirim ulang OTP, Fitur ini belum diaktifkan guys !", Toast.LENGTH_SHORT)
-        toast.show()
+    // Metode untuk memproses pengiriman ulang OTP
+    private fun resendOTP() {
+        val email = intent.getStringExtra("email")
+        if (email != null) {
+            requestOtp(email)
+        }
+    }
+
+    private fun requestOtp(email: String) {
+        val requestOtpReg = UserRequest().apply {
+            this.email = email
+        }
+
+        val retro = Retro().getRetroClientInstance().create(UserApi::class.java)
+        retro.requestOtp(requestOtpReg).enqueue(object : Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                if (response.isSuccessful) {
+                    val otpResponse = response.body()
+                    if (otpResponse != null) {
+                        val toast = Toast.makeText(
+                            this@OtpActivity,
+                            "Permintaan OTP berhasil terkirim",
+                            Toast.LENGTH_SHORT
+                        )
+                        toast.show()
+                    }
+                } else {
+                    val toast = Toast.makeText(
+                        this@OtpActivity,
+                        "Gagal meminta OTP. Silakan coba lagi.",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast.show()
+                }
+            }
+
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                t.message?.let { Log.e("error", it) }
+            }
+        })
     }
 
     private fun verifyOtp(otp: String) {

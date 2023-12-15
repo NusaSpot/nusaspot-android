@@ -8,7 +8,7 @@
     android:focusableInTouchMode="true">
 
     <LinearLayout
-        android:id="@+id/ll_login"
+        android:id="@+id/ll_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -22,14 +22,33 @@
             style="@style/loginHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="@string/login" />
+            android:text="Daftar Akun" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputEmail"
+            android:id="@+id/textInputName"
             style="@style/parent"
-            android:layout_marginTop="@dimen/loginViewsMargin">
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="334dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableLeft="@drawable/ic_baseline_person_24"
+                android:drawablePadding="8dp"
+                android:hint="@string/login_name_hint"
+                android:padding="8dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputMobile"
+            style="@style/parent">
 
             <EditText
                 android:id="@+id/edtEmail"
@@ -40,15 +59,14 @@
                 android:background="@drawable/edittext_bg"
                 android:drawableLeft="@drawable/ic_baseline_email_24"
                 android:drawablePadding="8dp"
-                android:hint="Email"
+                android:hint="@string/login_email_hint"
+                android:inputType="textEmailAddress"
                 android:padding="8dp" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputPassword"
-            style="@style/parent"
-            android:layout_marginTop="@dimen/loginViewsMargin">
+            android:id="@+id/textInputEmail"
+            style="@style/parent">
 
             <EditText
                 android:id="@+id/edtPwd"
@@ -59,37 +77,49 @@
                 android:background="@drawable/edittext_bg"
                 android:drawableLeft="@drawable/ic_baseline_lock_24"
                 android:drawablePadding="8dp"
-                android:hint="Password"
+                android:hint="@string/login_password_hint"
                 android:inputType="textPassword"
+                android:padding="8dp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputPassword"
+            style="@style/parent">
+
+            <EditText
+                android:id="@+id/edtPwdConf"
+                android:layout_width="334dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableLeft="@drawable/ic_baseline_lock_24"
+                android:drawablePadding="8dp"
+                android:hint="@string/konfirmasi_password"
+                android:inputType="textEmailAddress"
                 android:padding="8dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/cirLoginButton"
+            android:id="@+id/btnRegister"
             style="@style/loginButton"
             android:layout_width="334dp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/loginViewsMargin"
-            android:text="Login" />
+            android:text="DAFTAR" />
+
 
         <TextView
-            android:id="@+id/reset_page"
-            style="@style/parent"
-            android:layout_width="147dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/loginViewsMargin"
-            android:gravity="center"
-            android:text="@string/lupa_password"
-            android:textColor="@color/colorPrimary" />
-
-        <TextView
-            android:id="@+id/tv_register"
+            android:id="@+id/tv_login"
             style="@style/parent"
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:gravity="center"
-            android:text="@string/login_signup_hint"
+            android:text="@string/login_signin_hint"
             android:textColor="@color/colorPrimary" />
+
 
     </LinearLayout>
 
@@ -97,9 +127,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo3"
-        android:layout_marginTop="60dp"
-        android:layout_below="@id/ll_login"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/ll_register"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/logo_description"/>
-
 </RelativeLayout>
