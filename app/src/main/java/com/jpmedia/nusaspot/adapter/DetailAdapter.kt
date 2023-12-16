@@ -11,21 +11,33 @@ import com.bumptech.glide.Glide
 import com.jpmedia.nusaspot.R
 import com.jpmedia.nusaspot.api.DetailData
 
-class DetailAdapter(private val context: Context, private var detailDataList: List<DetailData>) :
+class DetailAdapter(private val context: Context, private var detailDataList: MutableList<DetailData>) :
     RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
+    private var onDeleteButtonClickListener: ((detectId: String, id: Int) -> Unit)? = null
 
-    class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // Inisialisasi tampilan di sini
-        val detectImage: ImageView = itemView.findViewById(R.id.imageView)
-        val description: TextView = itemView.findViewById(R.id.descriptionTextView)
-
-        // Tambahkan tampilan lain sesuai kebutuhan
+    fun setOnDeleteButtonClickListener(listener: (detectId: String, id: Int) -> Unit) {
+        onDeleteButtonClickListener = listener
     }
 
-    // Deklarasikan fungsi updateData sebagai bagian dari kelas DetailAdapter
+    class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val detectImage: ImageView = itemView.findViewById(R.id.imageView)
+        val description: TextView = itemView.findViewById(R.id.descriptionTextView)
+        val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
+    }
+
     fun updateData(newData: List<DetailData>) {
-        detailDataList = newData
+        detailDataList.clear()
+        detailDataList.addAll(newData)
         notifyDataSetChanged()
+    }
+
+    fun getDetailDataList(): MutableList<DetailData> {
+        return detailDataList
+    }
+
+    fun removeAt(position: Int) {
+        detailDataList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
@@ -40,6 +52,10 @@ class DetailAdapter(private val context: Context, private var detailDataList: Li
                 .load(it.image)
                 .into(holder.detectImage)
             holder.description.text = "Deskripsi: ${detailData.result}"
+
+            holder.deleteButton.setOnClickListener {
+                detailData.id?.let { it1 -> onDeleteButtonClickListener?.invoke(detailData.detectId.toString(), it1) }
+            }
         }
     }
 
@@ -47,4 +63,3 @@ class DetailAdapter(private val context: Context, private var detailDataList: Li
         return detailDataList.size
     }
 }
-

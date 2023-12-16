@@ -78,4 +78,12 @@ interface UserApi {
         @Path("detectId") detectId: String,
         @Header("Accept") accept: String = "application/json"
     ):retrofit2.Call<FinishResponse>
+
+    @GET("/api/detect-detail-delete/{detectId}/{id}")
+    fun deleteDetect(
+        @Header("Authorization") authorization: String,
+        @Path("detectId") detectId: String,
+        @Path("id") id: Int,
+        @Header("Accept") accept: String = "application/json"
+    ):retrofit2.Call<DeleteResponse>
 }
