@@ -86,4 +86,9 @@ interface UserApi {
         @Path("id") id: Int,
         @Header("Accept") accept: String = "application/json"
     ):retrofit2.Call<DeleteResponse>
+
+    @POST("api/reset-password")
+    fun resetPassword(
+        @Body userRequest: UserRequest
+    ):retrofit2.Call<ChangePasswordResponse>
 }

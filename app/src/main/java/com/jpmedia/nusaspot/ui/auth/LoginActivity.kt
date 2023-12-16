@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.jpmedia.nusaspot.R
 import com.jpmedia.nusaspot.api.Retro
 import com.jpmedia.nusaspot.api.UserApi
 import com.jpmedia.nusaspot.api.UserRequest
@@ -33,6 +32,10 @@ class LoginActivity : AppCompatActivity() {
         binding.tvRegister.setOnClickListener {
             // Handle click on tv_register TextView
             register()
+        }
+
+        binding.resetPage.setOnClickListener{
+            reset()
         }
     }
 
@@ -93,5 +96,11 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
 
+    }
+
+    private fun reset()
+    {
+        val intent = Intent(this, ResetPasswordActivity::class.java)
+        startActivity(intent)
     }
 }

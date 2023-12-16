@@ -17,6 +17,15 @@
         android:theme="@style/Theme.NusaSpot"
         tools:targetApi="31">
         <activity
+            android:name=".ui.auth.OtpResetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.NewPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.auth.RegisterActivity"
             android:exported="false" />
         <activity
