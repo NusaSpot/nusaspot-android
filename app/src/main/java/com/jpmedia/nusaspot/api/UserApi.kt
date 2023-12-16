@@ -91,4 +91,11 @@ interface UserApi {
     fun resetPassword(
         @Body userRequest: UserRequest
     ):retrofit2.Call<ChangePasswordResponse>
+
+    @GET("/api/recipe/{id}")
+    fun getDetailRecipe(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: Int,
+        @Header("Accept") accept: String = "application/json"
+    ):retrofit2.Call<DetailResepResponse>
 }

@@ -17,6 +17,12 @@
         android:theme="@style/Theme.NusaSpot"
         tools:targetApi="31">
         <activity
+            android:name=".ui.resep.DetailResepActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.resep.ResepActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.auth.OtpResetActivity"
             android:exported="false" />
         <activity

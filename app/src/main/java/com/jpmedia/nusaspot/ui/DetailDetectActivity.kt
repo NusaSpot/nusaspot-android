@@ -19,6 +19,7 @@ import com.jpmedia.nusaspot.databinding.ActivityDetailDetectBinding
 import com.jpmedia.nusaspot.model.DetailViewModelFactory
 import com.jpmedia.nusaspot.model.DetectDetailViewModel
 import com.jpmedia.nusaspot.ui.repository.DetailRepository
+import com.jpmedia.nusaspot.ui.resep.ResepActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -86,7 +87,6 @@ class DetailDetectActivity : AppCompatActivity() {
                 })
             }
         }
-
         binding.buttonSearchRecipe.setOnClickListener {
             if (authToken != null && detectId != null) {
                 // Lakukan panggilan ke endpoint detectFinish
@@ -97,7 +97,13 @@ class DetailDetectActivity : AppCompatActivity() {
                             val finishResponse = response.body()
                             // Tampilkan ID dari respons JSON ke dalam Toast
                             finishResponse?.data?.let { data ->
-                                // Optional: Hanya jika ingin menutup aktivitas saat pindah ke DetectActivity
+                                // Optional: Hanya jika ingin menutup aktivitas saat pindah ke RecepActivity
+
+                                // Sertakan detectId dalam Intent
+                                val intent = Intent(this@DetailDetectActivity, ResepActivity::class.java)
+                                intent.putExtra("detectId", detectId)
+                                startActivity(intent)
+                                finish()
                             }
                         } else {
                             // Tanggapi kesalahan dari respons HTTP
@@ -110,14 +116,11 @@ class DetailDetectActivity : AppCompatActivity() {
                         Toast.makeText(this@DetailDetectActivity, "Detect finish request failed", Toast.LENGTH_SHORT).show()
                     }
                 })
-
-                val intent = Intent(this@DetailDetectActivity, DetectActivity::class.java)
-                startActivity(intent)
-                finish()
             } else {
                 Toast.makeText(this@DetailDetectActivity, "Token or detectId is null. Handle this case appropriately.", Toast.LENGTH_SHORT).show()
             }
         }
+
 
         buttonAddImage.setOnClickListener {
             if (!detectId.isNullOrEmpty()) {
