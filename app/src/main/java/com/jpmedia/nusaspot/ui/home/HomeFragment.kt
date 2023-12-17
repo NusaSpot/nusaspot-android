@@ -6,19 +6,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.jpmedia.nusaspot.adapter.HomeAdapter
+import com.jpmedia.nusaspot.api.Recipe
+import com.jpmedia.nusaspot.api.Retro
+import com.jpmedia.nusaspot.api.UserApi
 import com.jpmedia.nusaspot.databinding.FragmentHomeBinding
-import com.jpmedia.nusaspot.ui.DetectActivity
-
+import com.jpmedia.nusaspot.ui.repository.ResepRepository
+import com.jpmedia.nusaspot.model.ResepViewModel
+import com.jpmedia.nusaspot.model.ResepViewModelFactory
+import com.jpmedia.nusaspot.ui.resep.DetailResepActivity
 
 class HomeFragment : Fragment() {
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var homeAdapter: HomeAdapter
+    private lateinit var resepViewModel: ResepViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,32 +33,36 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val apiService = Retro().getRetroClientInstance().create(UserApi::class.java)
+        val resepRepository = ResepRepository(apiService)
+        val resepViewModelFactory = ResepViewModelFactory(resepRepository)
+        resepViewModel = ViewModelProvider(this, resepViewModelFactory).get(ResepViewModel::class.java)
+        homeAdapter = HomeAdapter(object : HomeAdapter.OnRecipeClickListener {
+            override fun onRecipeClick(recipe: Recipe) {
+                onItemClick(recipe)
+            }
+        })
 
-        // Inisialisasi ViewModel
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-
-        // Observasi perubahan pada userData
-        homeViewModel.userData.observe(viewLifecycleOwner) { userResponse ->
-            // Update tampilan dengan data pengguna yang diperoleh dari API
-            val user = userResponse?.data
-            binding.TextView.text = "Welcome, ${user?.name}"
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = homeAdapter
         }
-
-        binding.btnDetect.setOnClickListener {
-            val intent = Intent(requireContext(), DetectActivity::class.java)
-            startActivity(intent)
+        resepViewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
+            recipes?.let {
+                homeAdapter.setRecipes(it)
+            }
         }
-
         val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("token", null)
-
-        if (authToken != null) {
-            homeViewModel.loadUserData(authToken)
-        }else{
-            Toast.makeText(requireContext(), "token kosong", Toast.LENGTH_SHORT).show()
-        }
+        resepViewModel.fetchRecipes("Bearer $authToken".orEmpty())
 
         return root
+    }
+
+    private fun onItemClick(recipe: Recipe) {
+        val intent = Intent(requireContext(), DetailResepActivity::class.java)
+        intent.putExtra("recipeId", recipe.id)
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

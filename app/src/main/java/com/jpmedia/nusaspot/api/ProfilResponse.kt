@@ -26,6 +26,10 @@ class ProfilResponse {
         @Expose
         var userId: String? = null
 
+        @SerializedName("name")
+        @Expose
+        var name: String? = null
+
         @SerializedName("gender")
         @Expose
         var gender: String? = null

@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.jpmedia.nusaspot.databinding.FragmentUserBinding
+import com.jpmedia.nusaspot.ui.DetailDetectActivity
+import com.jpmedia.nusaspot.ui.DetectActivity
 import com.jpmedia.nusaspot.ui.EditProfilActivity
 import com.jpmedia.nusaspot.ui.auth.LogoutListener
 
@@ -40,18 +42,22 @@ class UserFragment : Fragment() {
         binding.logoutButton.setOnClickListener {
             logoutListener.performLogout()
         }
-        binding.EditProfil.setOnClickListener {
+        binding.EditProfile.setOnClickListener {
             val intent = Intent(requireContext(), EditProfilActivity::class.java)
             startActivity(intent)
-            activity?.finish()
+
+        }
+
+        binding.riwayatDeteksi.setOnClickListener{
+            val intent = Intent(requireContext(), DetectActivity::class.java)
+            startActivity(intent)
+
         }
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         userViewModel.profilData.observe(viewLifecycleOwner) { profilResponse ->
 
             val profil = profilResponse?.data
-            binding.gender.text = profil?.gender
-            binding.dateOfBirth.text = profil?.dateOfBirth
-            binding.phone.text = profil?.phone
+            binding.profilName.text = profil?.name
             profil?.profilePicture?.let { url ->
                 Glide.with(this)
                     .load(url)
@@ -67,7 +73,7 @@ class UserFragment : Fragment() {
         if (authToken != null) {
             userViewModel.loadProfilData(authToken)
         }else{
-            //  Toast.makeText(requireContext(), "token kosong", Toast.LENGTH_SHORT).show()
+
         }
 
         return root

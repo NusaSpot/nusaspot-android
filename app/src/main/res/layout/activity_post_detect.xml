@@ -78,7 +78,7 @@
         android:drawablePadding="8dp"
         android:drawableStart="@drawable/user_scan"
         android:gravity="start|center_vertical"
-        android:text="Deteksi Makanan" />
+        android:text="Deteksi Bahan" />
 
     <Button
         android:id="@+id/galleryButton"

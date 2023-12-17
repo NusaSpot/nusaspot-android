@@ -4,6 +4,7 @@
 
     <color name="colorPrimary">#59A14F</color>
     <color name="colorPrimaryDark">#59A14F</color>
+    <color name="colorResep">#89D900</color>
     <color name="colorAccent">#59A14F</color>
 
     <!--colors for modern UI-->
@@ -14,6 +15,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#F44336</color>
     <color name="button">#89D900</color>
+    <color name="colorquestion">#C6F96F</color>
     <color name="grey">#8F8F83</color>
 
     <!--colors for card-->
