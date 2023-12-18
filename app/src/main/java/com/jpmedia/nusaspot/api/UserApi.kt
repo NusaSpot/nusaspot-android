@@ -2,6 +2,7 @@ package com.jpmedia.nusaspot.api
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.http.*
 
 interface UserApi {
@@ -89,5 +90,27 @@ interface UserApi {
         @Header("Authorization") authorization: String,
         @Header("Accept") accept: String = "application/json"
     ):retrofit2.Call<FinishResponse>
+
+
+    @GET("api/recipe")
+    fun getSearchResep(
+        @Query("search") query: String,
+        @Header("Authorization") authorization: String,
+        @Header("Accept") accept: String = "application/json"
+    ): Call<FinishResponse>
+
+    @GET("/api/nutritionist")
+    fun getNutritionist(
+        @Header("Authorization") authorization: String,
+        @Header("Accept") accept: String = "application/json"
+    ): Call <NutritionistResponse>
+
+    @GET("/api/nutritionist")
+    fun serachNutritionist(
+        @Query("search") query: String,
+        @Header("Authorization") authorization: String,
+        @Header("Accept") accept: String = "application/json"
+    ): Call <NutritionistResponse>
+
 
 }

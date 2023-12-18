@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,21 +18,31 @@
 
     <Button
         android:id="@+id/buttonAddImage"
-        android:layout_width="0dp"
+        android:layout_width="297dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        android:drawablePadding="8dp"
         android:text="Tambah Gambar"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/buttonSearchRecipe"
-        android:layout_width="0dp"
+        android:layout_width="297dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button"
+        android:drawablePadding="8dp"
         android:text="Cari Resep"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddImage"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

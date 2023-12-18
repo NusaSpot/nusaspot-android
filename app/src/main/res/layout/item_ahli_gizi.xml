@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="16dp"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="16dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        android:background="@color/ahligizi">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageCardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:background="@color/ahligizi"
+                android:layout_width="150dp"
+                android:layout_height="146dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/dokter" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingStart="13dp"
+            android:text="Dr.Pawan"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.066"
+            app:layout_constraintStart_toEndOf="@+id/imageCardView"
+            app:layout_constraintTop_toTopOf="@+id/imageCardView"
+            app:layout_constraintVertical_bias="0.166" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:paddingStart="11dp"
+            android:text="Jorem ipsum dolor, consectetur adipiscing elit. Nunc v libero et velit interdum, ac  mattis."
+            android:maxLines="4"
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageCardView"
+            app:layout_constraintStart_toEndOf="@+id/imageCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageCardView" />
+
+        <TextView
+            android:id="@+id/chat"
+            android:layout_width="89dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/rounded_image_background"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="Chat"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/imageCardView"
+            app:layout_constraintStart_toEndOf="@+id/imageCardView"
+            app:layout_constraintTop_toTopOf="@+id/imageCardView"
+            app:layout_constraintVertical_bias="0.84" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -1,10 +1,10 @@
-package com.jpmedia.nusaspot.ui.notifications
+package com.jpmedia.nusaspot.ui.ahligizi
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class AhliGiziViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"

@@ -31,10 +31,6 @@ class DetailResepActivity : AppCompatActivity() {
 
     private fun fetchDetailRecipe() {
         val resepId = intent.getIntExtra("recipeId", 0)
-        if(resepId !=null)
-        {
-            Toast.makeText(this, "${resepId}", Toast.LENGTH_SHORT).show()
-        }
         apiService.getDetailRecipe("Bearer $authToken", resepId).enqueue(object : Callback<DetailResepResponse> {
             override fun onResponse(call: Call<DetailResepResponse>, response: Response<DetailResepResponse>) {
                 if (response.isSuccessful) {

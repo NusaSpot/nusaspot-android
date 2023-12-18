@@ -11,8 +11,16 @@ class ResepViewModel(private val repository: ResepRepository) : ViewModel() {
     private val _recipeList = MutableLiveData<List<Recipe>?>()
     val recipeList: LiveData<List<Recipe>?> get() = _recipeList
 
+    // Fungsi untuk mendapatkan resep tanpa pencarian
     fun fetchRecipes(authorization: String) {
         repository.getResep(authorization).observeForever {
+            _recipeList.value = it
+        }
+    }
+
+    // Fungsi untuk melakukan pencarian
+    fun searchRecipes(authorization: String, searchTerm: String) {
+        repository.searchRecipes(authorization, searchTerm).observeForever {
             _recipeList.value = it
         }
     }

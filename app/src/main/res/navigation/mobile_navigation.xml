@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
+    app:labelVisibilityMode="labeled"
     app:startDestination="@+id/navigation_home">
 
     <fragment
@@ -14,18 +15,18 @@
     <fragment
         android:id="@+id/navigation_deteksi"
         android:name="com.jpmedia.nusaspot.ui.deteksi.DeteksiFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_deteksi"
         tools:layout="@layout/fragment_deteksi" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.jpmedia.nusaspot.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_ahli_gizi"
+        android:name="com.jpmedia.nusaspot.ui.ahligizi.AhliGiziFragment"
+        android:label="@string/title_ahli_gizi"
+        tools:layout="@layout/fragment_ahli_gizi" />
 
     <fragment
         android:id="@+id/navigation_user"
         android:name="com.jpmedia.nusaspot.ui.user.UserFragment"
         android:label="@string/title_user"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_ahli_gizi" />
 </navigation>

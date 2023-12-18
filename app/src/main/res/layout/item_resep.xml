@@ -2,39 +2,82 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="4dp"
-    app:cardUseCompatPadding="true"
-    app:contentPadding="8dp"
-    android:layout_margin="8dp">
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="16dp"
+    app:cardElevation="0dp"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="116dp"
+        android:background="@android:color/transparent">
 
-        <ImageView
-            android:id="@+id/img_resep"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="16dp"
-            android:contentDescription="User Image"
-            tools:background="@drawable/profile"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/title"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageCardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="TextView"
+            app:cardCornerRadius="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageResep"
+                android:layout_width="135dp"
+                android:layout_height="116dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/pisang" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="Pisang Keju"
+            android:textColor="@color/primaryTextColor"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@id/img_resep"
-            app:layout_constraintStart_toEndOf="@+id/img_resep"
-            app:layout_constraintTop_toTopOf="@id/img_resep" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageCardView"
+            app:layout_constraintTop_toTopOf="@+id/imageCardView"
+            app:layout_constraintVertical_bias="0.166"
+            app:layout_constraintWidth_max="200dp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:paddingStart="4dp"
+            android:text="Sarapan"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/cekresep"
+            app:layout_constraintStart_toEndOf="@+id/imageCardView"
+            app:layout_constraintTop_toBottomOf="@+id/textTitle"
+            />
+
+        <TextView
+            android:id="@+id/cekresep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Cek Resep"
+            android:textStyle="bold"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="10sp"
+            android:background="@drawable/rounded_image_background"
+            app:layout_constraintBottom_toBottomOf="@+id/imageCardView"
+            app:layout_constraintStart_toEndOf="@+id/imageCardView"
+            app:layout_constraintTop_toBottomOf="@+id/description"
+            app:layout_constraintVertical_bias="0.84"
+            android:gravity="center"
+            android:padding="5dp" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

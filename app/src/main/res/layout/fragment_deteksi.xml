@@ -14,12 +14,12 @@
         android:background="#ffffff"
         android:padding="13dp">
 
-        <ImageView
-            android:id="@+id/arrowBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/baseline_arrow_back_ios_24"
-            />
+<!--        <ImageView-->
+<!--            android:id="@+id/arrowBack"-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/baseline_arrow_back_ios_24"-->
+<!--            />-->
 
         <TextView
             android:id="@+id/title"
@@ -78,7 +78,7 @@
         android:drawablePadding="8dp"
         android:drawableStart="@drawable/user_scan"
         android:gravity="start|center_vertical"
-        android:text="Deteksi Makanan" />
+        android:text="Deteksi Bahan" />
 
     <Button
         android:id="@+id/galleryButton"
@@ -104,21 +104,21 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:textColor="@color/white"
-        android:paddingStart="40dp"
         android:drawablePadding="8dp"
-        android:drawableStart="@drawable/gallery"
-        android:gravity="start|center_vertical"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
         android:background="@drawable/button"
         android:text="Unggah" />
 
-    <!-- Bottom Navigation -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#ffffff"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu"/>
+
+    <!--    &lt;!&ndash; Bottom Navigation &ndash;&gt;-->
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--        android:id="@+id/bottomNavigation"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:background="#ffffff"-->
+    <!--        app:labelVisibilityMode="labeled"-->
+    <!--        app:menu="@menu/bottom_nav_menu"/>-->
 
 </RelativeLayout>

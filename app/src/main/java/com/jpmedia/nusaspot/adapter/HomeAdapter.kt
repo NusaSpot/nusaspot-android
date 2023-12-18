@@ -42,6 +42,7 @@ class HomeAdapter(private val clickListener: OnRecipeClickListener) : RecyclerVi
     class HomeViewHolder(private val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: Recipe) {
             binding.textTitle.text = recipe.title
+            binding.description.text = recipe.category
             Glide.with(binding.root.context)
                 .load(recipe.image)
                 .into(binding.imageResep)

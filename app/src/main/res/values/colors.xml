@@ -6,6 +6,8 @@
     <color name="colorPrimaryDark">#59A14F</color>
     <color name="colorResep">#89D900</color>
     <color name="colorAccent">#59A14F</color>
+    <color name="ahligizi">#99D2EBE7</color>
+    <color name="colorSecondary">#89D900</color>
 
     <!--colors for modern UI-->
     <color name="whiteTextColor">#FFF</color>

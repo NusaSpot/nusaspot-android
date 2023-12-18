@@ -10,6 +10,7 @@ import retrofit2.Response
 
 
 class ResepRepository(private val apiService: UserApi) {
+
     fun getResep(authorization: String): MutableLiveData<List<Recipe>?> {
         val result = MutableLiveData<List<Recipe>?>()
         apiService.getResep(authorization).enqueue(object : Callback<FinishResponse> {
@@ -21,6 +22,27 @@ class ResepRepository(private val apiService: UserApi) {
                     result.value = null
                 }
             }
+
+            override fun onFailure(call: Call<FinishResponse>, t: Throwable) {
+                Log.e("RecipeRepository", "Request failed", t)
+                result.value = null
+            }
+        })
+        return result
+    }
+
+    fun searchRecipes(authorization: String, searchTerm: String): MutableLiveData<List<Recipe>?> {
+        val result = MutableLiveData<List<Recipe>?>()
+        apiService.getSearchResep(searchTerm, authorization).enqueue(object : Callback<FinishResponse> {
+            override fun onResponse(call: Call<FinishResponse>, response: Response<FinishResponse>) {
+                if (response.isSuccessful) {
+                    result.value = response.body()?.data
+                } else {
+                    Log.e("RecipeRepository", "Unsuccessful response: ${response.code()}")
+                    result.value = null
+                }
+            }
+
             override fun onFailure(call: Call<FinishResponse>, t: Throwable) {
                 Log.e("RecipeRepository", "Request failed", t)
                 result.value = null
@@ -29,4 +51,5 @@ class ResepRepository(private val apiService: UserApi) {
         return result
     }
 }
+
 

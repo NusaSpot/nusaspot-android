@@ -1,52 +1,54 @@
-package com.jpmedia.nusaspot.ui.home
+package com.jpmedia.nusaspot.ui.ahligizi
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.appcompat.widget.SearchView
-import com.jpmedia.nusaspot.adapter.HomeAdapter
-import com.jpmedia.nusaspot.api.Recipe
+import com.jpmedia.nusaspot.adapter.NutritionistAdapter
+import com.jpmedia.nusaspot.api.NutritionistData
 import com.jpmedia.nusaspot.api.Retro
 import com.jpmedia.nusaspot.api.UserApi
-import com.jpmedia.nusaspot.databinding.FragmentHomeBinding
-import com.jpmedia.nusaspot.ui.repository.ResepRepository
-import com.jpmedia.nusaspot.model.ResepViewModel
-import com.jpmedia.nusaspot.model.ResepViewModelFactory
+import com.jpmedia.nusaspot.databinding.FragmentAhliGiziBinding
+import com.jpmedia.nusaspot.model.NutritionistViewModel
+import com.jpmedia.nusaspot.model.NutritionistViewModelFactory
+import com.jpmedia.nusaspot.ui.repository.NutritionistRepository
 import com.jpmedia.nusaspot.ui.resep.DetailResepActivity
 
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
+class AhliGiziFragment : Fragment() {
+    private var _binding: FragmentAhliGiziBinding? = null
     private val binding get() = _binding!!
-    private lateinit var homeAdapter: HomeAdapter
-    private lateinit var resepViewModel: ResepViewModel
+    private lateinit var nutritionistAdapter: NutritionistAdapter
+    private lateinit var nutritionistViewModel: NutritionistViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentAhliGiziBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val apiService = Retro().getRetroClientInstance().create(UserApi::class.java)
-        val resepRepository = ResepRepository(apiService)
-        val resepViewModelFactory = ResepViewModelFactory(resepRepository)
-        resepViewModel =
-            ViewModelProvider(this, resepViewModelFactory).get(ResepViewModel::class.java)
-        homeAdapter = HomeAdapter(object : HomeAdapter.OnRecipeClickListener {
-            override fun onRecipeClick(recipe: Recipe) {
-                onItemClick(recipe)
+        val nutritionistRepository = NutritionistRepository(apiService)
+        val nutritionistViewModelFactory = NutritionistViewModelFactory(nutritionistRepository)
+        nutritionistViewModel =
+            ViewModelProvider(this, nutritionistViewModelFactory).get(NutritionistViewModel::class.java)
+        nutritionistAdapter = NutritionistAdapter(object : NutritionistAdapter.OnNutritionistClickListener {
+            override fun onNutritionistClick(phone: String) {
+                // Panggil fungsi atau lakukan aksi yang sesuai dengan klik item di sini
+                openWhatsAppChat(phone)
             }
         })
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = homeAdapter
+            adapter = nutritionistAdapter
         }
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -61,10 +63,10 @@ class HomeFragment : Fragment() {
                 val searchTerms = newText.orEmpty().split("\\s+".toRegex())
                 if (searchTerms.isEmpty() || searchTerms.all { it.isBlank() }) {
                     binding.emptyTextView.visibility = View.GONE
-                    resepViewModel.fetchRecipes("Bearer $authToken".orEmpty())
+                    nutritionistViewModel.getNutritionist("Bearer $authToken".orEmpty())
                 } else {
                     for (term in searchTerms) {
-                        resepViewModel.searchRecipes("Bearer $authToken", term)
+                        nutritionistViewModel.searchNutritionists("Bearer $authToken", term)
                     }
                     binding.emptyTextView.visibility = View.GONE
                 }
@@ -73,32 +75,32 @@ class HomeFragment : Fragment() {
             }
         })
 
-        resepViewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
-            recipes?.let {
+        nutritionistViewModel.recipeList.observe(viewLifecycleOwner) { nutritionists ->
+            nutritionists?.let {
                 if (it.isEmpty()) {
-                    // Tampilkan pesan jika data resep tidak ditemukan
                     binding.emptyTextView.visibility = View.VISIBLE
                 } else {
                     binding.emptyTextView.visibility = View.GONE
                 }
-                homeAdapter.setRecipes(it)
+                nutritionistAdapter.setNutritionists(it)
             }
-            if (recipes == null) {
-                homeAdapter.setRecipes(emptyList())
+            if (nutritionists == null) {
+                nutritionistAdapter.setNutritionists(emptyList())
                 binding.emptyTextView.visibility = View.VISIBLE
             }
         }
         val sharedPreferences =
             requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("token", null)
-        resepViewModel.fetchRecipes("Bearer $authToken".orEmpty())
+        nutritionistViewModel.getNutritionist("Bearer $authToken".orEmpty())
 
         return root
     }
 
-    private fun onItemClick(recipe: Recipe) {
-        val intent = Intent(requireContext(), DetailResepActivity::class.java)
-        intent.putExtra("recipeId", recipe.id)
+    private fun openWhatsAppChat(phone: String) {
+        // Contoh aksi: Buka obrolan WhatsApp dengan nomor telepon yang diberikan
+        val url = "https://api.whatsapp.com/send?phone=$phone"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
 
@@ -107,3 +109,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+

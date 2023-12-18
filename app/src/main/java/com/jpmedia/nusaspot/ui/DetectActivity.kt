@@ -42,29 +42,21 @@ class DetectActivity : AppCompatActivity() {
 
         binding.fabAdd.setOnClickListener {
             if (authToken != null) {
-                // Lakukan panggilan ke endpoint getDetectStart
                 apiService.getDetectStart("Bearer $authToken").enqueue(object : Callback<DetectStartResponse> {
                     override fun onResponse(call: Call<DetectStartResponse>, response: Response<DetectStartResponse>) {
                         if (response.isSuccessful) {
-                            // Tanggapi hasil yang berhasil
                             val detectStartResponse = response.body()
-                            // Tampilkan ID dari respons JSON ke dalam Toast
                             detectStartResponse?.data?.let { data ->
                                 val intent = Intent(this@DetectActivity, PostDetectActivity::class.java)
-                              //  Toast.makeText(this@DetectActivity, "${data?.id}", Toast.LENGTH_SHORT).show()
                                 intent.putExtra("DETECT_ID", data.id.toString())
                                 startActivity(intent)
-                                finish() // Optional: Hanya jika ingin menutup aktivitas saat pindah ke PostDetectActivity
+                                finish()
                             }
-
                         } else {
-                            // Tanggapi kesalahan dari respons HTTP
                             Toast.makeText(this@DetectActivity, "Detect start failed: ${response.code()}", Toast.LENGTH_SHORT).show()
                         }
                     }
-
                     override fun onFailure(call: Call<DetectStartResponse>, t: Throwable) {
-                        // Tanggapi kegagalan dalam melakukan panggilan
                         Toast.makeText(this@DetectActivity, "Detect start request failed", Toast.LENGTH_SHORT).show()
                     }
                 })
@@ -84,7 +76,6 @@ class DetectActivity : AppCompatActivity() {
                 val clickedItem = detectAdapter.getItem(position)
 
                 if (clickedItem?.id != null && clickedItem.id != 0) {
-                    // Mengganti dari userId ke id
                     val intent = Intent(this@DetectActivity, DetailDetectActivity::class.java)
                     intent.putExtra("DETECT_ID", clickedItem.id.toString()) // Mengonversi Int ke String
                     intent.putExtra("status", 1)
