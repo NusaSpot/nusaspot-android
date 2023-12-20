@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +19,6 @@ import com.jpmedia.nusaspot.api.UserApi
 import com.jpmedia.nusaspot.databinding.ActivityDetailDetectBinding
 import com.jpmedia.nusaspot.model.DetailViewModelFactory
 import com.jpmedia.nusaspot.model.DetectDetailViewModel
-import com.jpmedia.nusaspot.ui.deteksi.DeteksiFragment
 import com.jpmedia.nusaspot.ui.repository.DetailRepository
 import com.jpmedia.nusaspot.ui.resep.ResepActivity
 import retrofit2.Call
@@ -142,20 +140,9 @@ class DetailDetectActivity : AppCompatActivity() {
             }
         }
 
-//        buttonAddImage.setOnClickListener {
-//                val navController = findNavController(R.id.nav_host_fragment_activity_bottom_nav)
-//                navController.navigate(R.id.navigation_deteksi)
-//                finish()
-//        }
-
         buttonAddImage.setOnClickListener {
             onBackPressed()
         }
-
-
-
-
-
 
         if (!detectId.isNullOrEmpty()) {
             detectDetailViewModel =
@@ -164,7 +151,7 @@ class DetailDetectActivity : AppCompatActivity() {
             detectDetailViewModel.fetchDetail(detectId, "Bearer $authToken".orEmpty())
             detectDetailViewModel.detectDetailData.observe(this, { detailDataList ->
                 // Perbarui adapter RecyclerView dengan data terbaru
-                detailAdapter.updateData(detailDataList)
+                detailAdapter.updateData(detailDataList, status)
             })
         } else {
             Toast.makeText(this, "Invalid detectId", Toast.LENGTH_SHORT).show()

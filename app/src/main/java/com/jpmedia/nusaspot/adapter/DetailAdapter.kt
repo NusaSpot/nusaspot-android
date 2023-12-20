@@ -11,33 +11,38 @@ import com.bumptech.glide.Glide
 import com.jpmedia.nusaspot.R
 import com.jpmedia.nusaspot.api.DetailData
 
+
+
+
 class DetailAdapter(private val context: Context, private var detailDataList: MutableList<DetailData>) :
     RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
     private var onDeleteButtonClickListener: ((detectId: String, id: Int) -> Unit)? = null
+    private var status: Int = 0
 
     fun setOnDeleteButtonClickListener(listener: (detectId: String, id: Int) -> Unit) {
         onDeleteButtonClickListener = listener
     }
 
-    class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val detectImage: ImageView = itemView.findViewById(R.id.imageView)
-        val description: TextView = itemView.findViewById(R.id.descriptionTextView)
-        val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
-    }
-
-    fun updateData(newData: List<DetailData>) {
+    fun updateData(newData: List<DetailData>, status: Int) {
+        this.status = status
         detailDataList.clear()
         detailDataList.addAll(newData)
         notifyDataSetChanged()
     }
 
-    fun getDetailDataList(): MutableList<DetailData> {
+    fun getDetailDataList(): List<DetailData> {
         return detailDataList
     }
 
     fun removeAt(position: Int) {
         detailDataList.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val detectImage: ImageView = itemView.findViewById(R.id.imageView)
+        val description: TextView = itemView.findViewById(R.id.descriptionTextView)
+        val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
@@ -53,8 +58,22 @@ class DetailAdapter(private val context: Context, private var detailDataList: Mu
                 .into(holder.detectImage)
             holder.description.text = "Deskripsi: ${detailData.result}"
 
-            holder.deleteButton.setOnClickListener {
-                detailData.id?.let { it1 -> onDeleteButtonClickListener?.invoke(detailData.detectId.toString(), it1) }
+            // Cek status di sini
+            if (status == 1) {
+                // Status = 1, sembunyikan tombol delete
+                holder.deleteButton.visibility = View.GONE
+            } else {
+                // Status bukan 1, tampilkan tombol delete
+                holder.deleteButton.visibility = View.VISIBLE
+
+                holder.deleteButton.setOnClickListener {
+                    detailData.id?.let { it1 ->
+                        onDeleteButtonClickListener?.invoke(
+                            detailData.detectId.toString(),
+                            it1
+                        )
+                    }
+                }
             }
         }
     }

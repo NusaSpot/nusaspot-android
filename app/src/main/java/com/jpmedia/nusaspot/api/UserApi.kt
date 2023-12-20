@@ -17,6 +17,10 @@ interface UserApi {
     fun register(
         @Body userRequest: UserRequest
     ):retrofit2.Call<UserResponse>
+
+    @GET("api/guest-login")
+    fun getGuest():Call<GuestResponse>
+
     @POST("api/request-otp")
     fun requestOtp(
         @Body userRequest: UserRequest
@@ -61,7 +65,20 @@ interface UserApi {
         @Part("phone") phone: RequestBody,
         @Part("gender") gender: RequestBody,
         @Part("date_of_birth") date_of_birth: RequestBody,
+        @Part("height") height : RequestBody,
+        @Part("weight") weight : RequestBody,
+        @Part("name") name : RequestBody,
+        @Header("Accept") accept: String = "application/json"
     ):retrofit2.Call<ProfilResponse>
+
+    @POST("api/update-body")
+    fun updateBody(
+        @Header("Authorization") authorization: String,
+        @Query("height") height: String,
+        @Query("weight") weight: String,
+        @Header("Accept") accept: String = "application/json"
+    ): Call<ProfilResponse>
+
     @GET("api/detect-finish/{detectId}")
     fun detectFinish(
         @Header("Authorization") authorization: String,
@@ -111,6 +128,8 @@ interface UserApi {
         @Header("Authorization") authorization: String,
         @Header("Accept") accept: String = "application/json"
     ): Call <NutritionistResponse>
+
+
 
 
 }

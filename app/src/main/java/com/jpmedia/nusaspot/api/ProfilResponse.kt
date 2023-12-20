@@ -46,6 +46,30 @@ class ProfilResponse {
         @Expose
         var phone: String? = null
 
+        @SerializedName("email")
+        @Expose
+        var email: String? = null
+
+        @SerializedName("weight")
+        @Expose
+        var weight: String? = null
+
+        @SerializedName("height")
+        @Expose
+        var height: String? = null
+
+        @SerializedName("body_status")
+        @Expose
+        var body_status: String? = null
+
+        @SerializedName("quotes")
+        @Expose
+        var quotes: String? = null
+
+        @SerializedName("is_guest")
+        @Expose
+        var is_guest: String? = null
+
         @SerializedName("created_at")
         @Expose
         var createdAt: String? = null

@@ -40,6 +40,8 @@
     <string name="login">Selamat Datang!</string>
     <string name="logo_description">Logo</string>
     <string name="konfirmasi_password">Konfirmasi Password</string>
+    <string name="quotes" />
+    <string name="login_guest">Login Guest</string>
 
 
 </resources>

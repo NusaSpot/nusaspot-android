@@ -17,6 +17,12 @@
         android:theme="@style/Theme.NusaSpot"
         tools:targetApi="31">
         <activity
+            android:name=".ui.QuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.EditProfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.resep.DetailResepActivity"
             android:exported="false" />
         <activity
@@ -42,8 +48,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,8 +60,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-
         <activity
             android:name=".ui.auth.OtpActivity"
             android:exported="false">
@@ -84,7 +88,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".ui.EditProfilActivity">
+        <activity android:name=".ui.DetailProfilActivity">
 
             <!-- Intent filters if any -->
         </activity>

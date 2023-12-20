@@ -11,9 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.jpmedia.nusaspot.databinding.FragmentUserBinding
-import com.jpmedia.nusaspot.ui.DetailDetectActivity
 import com.jpmedia.nusaspot.ui.DetectActivity
-import com.jpmedia.nusaspot.ui.EditProfilActivity
+import com.jpmedia.nusaspot.ui.DetailProfilActivity
 import com.jpmedia.nusaspot.ui.auth.LogoutListener
 
 class UserFragment : Fragment() {
@@ -42,8 +41,8 @@ class UserFragment : Fragment() {
         binding.logoutButton.setOnClickListener {
             logoutListener.performLogout()
         }
-        binding.EditProfile.setOnClickListener {
-            val intent = Intent(requireContext(), EditProfilActivity::class.java)
+        binding.detailProfil.setOnClickListener {
+            val intent = Intent(requireContext(), DetailProfilActivity::class.java)
             startActivity(intent)
 
         }
@@ -57,6 +56,18 @@ class UserFragment : Fragment() {
         userViewModel.profilData.observe(viewLifecycleOwner) { profilResponse ->
 
             val profil = profilResponse?.data
+            val guest = profil?.is_guest
+
+            if (guest != "0") {
+
+                binding.detailProfil.visibility = View.GONE
+                binding.riwayatDeteksi.visibility = View.GONE
+            } else {
+
+                binding.detailProfil.visibility = View.VISIBLE
+                binding.riwayatDeteksi.visibility = View.VISIBLE
+            }
+
             binding.profilName.text = profil?.name
             profil?.profilePicture?.let { url ->
                 Glide.with(this)
@@ -78,8 +89,6 @@ class UserFragment : Fragment() {
 
         return root
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

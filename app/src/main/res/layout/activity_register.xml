@@ -11,10 +11,8 @@
         android:id="@+id/ll_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="24dp"
+        android:layout_centerVertical="true"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical">
 
@@ -29,7 +27,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputName"
             style="@style/parent"
-            android:layout_marginTop="10dp">
+
+            app:startIconDrawable="@drawable/ic_baseline_person_24">
 
             <EditText
                 android:id="@+id/name"
@@ -38,8 +37,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edittext_bg"
-                android:drawableLeft="@drawable/ic_baseline_person_24"
-                android:drawablePadding="8dp"
+                android:drawablePadding="0dp"
                 android:hint="@string/login_name_hint"
                 android:padding="8dp" />
 
@@ -48,7 +46,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputMobile"
-            style="@style/parent">
+            style="@style/parent"
+            app:startIconDrawable="@drawable/ic_baseline_email_24">
 
             <EditText
                 android:id="@+id/edtEmail"
@@ -57,8 +56,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edittext_bg"
-                android:drawableLeft="@drawable/ic_baseline_email_24"
-                android:drawablePadding="8dp"
+                android:drawablePadding="0dp"
                 android:hint="@string/login_email_hint"
                 android:inputType="textEmailAddress"
                 android:padding="8dp" />
@@ -66,7 +64,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputEmail"
-            style="@style/parent">
+            style="@style/parent"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
             <EditText
                 android:id="@+id/edtPwd"
@@ -75,8 +75,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edittext_bg"
-                android:drawableLeft="@drawable/ic_baseline_lock_24"
-                android:drawablePadding="8dp"
+                android:drawablePadding="0dp"
                 android:hint="@string/login_password_hint"
                 android:inputType="textPassword"
                 android:padding="8dp" />
@@ -86,7 +85,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputPassword"
-            style="@style/parent">
+            style="@style/parent"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
             <EditText
                 android:id="@+id/edtPwdConf"
@@ -95,8 +96,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edittext_bg"
-                android:drawableLeft="@drawable/ic_baseline_lock_24"
-                android:drawablePadding="8dp"
+                android:drawablePadding="0dp"
                 android:hint="@string/konfirmasi_password"
                 android:inputType="textEmailAddress"
                 android:padding="8dp" />

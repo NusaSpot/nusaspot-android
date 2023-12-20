@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.jpmedia.nusaspot.api.GuestResponse
 import com.jpmedia.nusaspot.api.Retro
 import com.jpmedia.nusaspot.api.UserApi
 import com.jpmedia.nusaspot.api.UserRequest
@@ -37,6 +38,45 @@ class LoginActivity : AppCompatActivity() {
         binding.resetPage.setOnClickListener{
             reset()
         }
+
+        binding.guest.setOnClickListener {
+            loginGuest()
+        }
+    }
+
+    private fun loginGuest(){
+        val retro = Retro().getRetroClientInstance().create(UserApi::class.java)
+
+        retro.getGuest().enqueue(object : Callback<GuestResponse> {
+            override fun onResponse(call: Call<GuestResponse>, response: Response<GuestResponse>) {
+                if (response.isSuccessful) {
+                    val userResponse = response.body()
+                    val token = userResponse?.data?.token
+                    val username = userResponse?.data?.name
+                    if (token != null && username != null) {
+                        saveAuthToken(token)
+                        redirectToHome(username)
+                        val toast = Toast.makeText(
+                            applicationContext,
+                            "Login berhasil",
+                            Toast.LENGTH_SHORT
+                        )
+                        toast.show()
+                    }
+                } else {
+                    val toast = Toast.makeText(
+                        applicationContext,
+                        "Username atau password salah",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast.show()
+                }
+            }
+
+            override fun onFailure(call: Call<GuestResponse>, t: Throwable) {
+                t.message?.let { Log.e("error", it) }
+            }
+        })
     }
 
     private fun login() {

@@ -40,31 +40,6 @@ class DetectActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("token", null)
 
-        binding.fabAdd.setOnClickListener {
-            if (authToken != null) {
-                apiService.getDetectStart("Bearer $authToken").enqueue(object : Callback<DetectStartResponse> {
-                    override fun onResponse(call: Call<DetectStartResponse>, response: Response<DetectStartResponse>) {
-                        if (response.isSuccessful) {
-                            val detectStartResponse = response.body()
-                            detectStartResponse?.data?.let { data ->
-                                val intent = Intent(this@DetectActivity, PostDetectActivity::class.java)
-                                intent.putExtra("DETECT_ID", data.id.toString())
-                                startActivity(intent)
-                                finish()
-                            }
-                        } else {
-                            Toast.makeText(this@DetectActivity, "Detect start failed: ${response.code()}", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    override fun onFailure(call: Call<DetectStartResponse>, t: Throwable) {
-                        Toast.makeText(this@DetectActivity, "Detect start request failed", Toast.LENGTH_SHORT).show()
-                    }
-                })
-            } else {
-                Toast.makeText(this@DetectActivity, "Token is null. Handle this case appropriately.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
         if (authToken != null) {
             detectViewModel = ViewModelProvider(this, DetectViewModelFactory(detectRepository))
                 .get(DetectViewModel::class.java)

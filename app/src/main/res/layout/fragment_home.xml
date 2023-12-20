@@ -19,9 +19,11 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <RelativeLayout
+            android:id="@+id/no_detect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_border">
+            android:background="@drawable/rounded_border"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/logoImageView"
@@ -67,14 +69,14 @@
                 android:layout_marginEnd="18dp"
                 android:layout_toStartOf="@id/logoImageView"
                 android:padding="4dp"
-                android:text="Health Condition"
+                tools:text="Health Condition"
                 android:includeFontPadding="false"
                 android:textSize="20sp" />
 
 
 
             <TextView
-                android:id="@+id/welcomeText4"
+                android:id="@+id/question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/welcomeText3"
@@ -90,7 +92,129 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/detect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_border"
+           android:visibility="gone">
+
+
+            <TextView
+                android:id="@+id/quotes"
+                android:layout_width="199dp"
+                android:layout_height="92dp"
+                android:layout_below="@id/Nama"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="180dp"
+                android:includeFontPadding="false"
+                android:padding="8dp"
+                android:text="@string/quotes"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:text="Nusa"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/umur"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/Nama"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_background_data"
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="6dp"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                tools:text="20 tahun" />
+
+            <TextView
+                android:id="@+id/tinggi"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/Nama"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/umur"
+                android:background="@drawable/rounded_background_data"
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="6dp"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                tools:text="171 cm" />
+
+            <TextView
+                android:id="@+id/berat"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/tinggi"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="18dp"
+                android:layout_toEndOf="@+id/gender"
+                android:background="@drawable/rounded_background_data"
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="6dp"
+                android:text="60 kg"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/umur"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/rounded_background_data"
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="6dp"
+                android:text="Laki Laki"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/Health"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Nama"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="-26dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_toEndOf="@+id/Nama"
+
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="4dp"
+                android:text="Healthy"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
+
+
+
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
