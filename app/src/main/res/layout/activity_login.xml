@@ -109,4 +109,26 @@
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/logo_description"/>
 
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/darkBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99292929"
+        android:visibility="gone" />
+
+
+
+
+
+
+
+
 </RelativeLayout>

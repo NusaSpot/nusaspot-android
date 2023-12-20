@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.jpmedia.nusaspot'
+    namespace 'com.jpmedia.nutricare'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.jpmedia.nusaspot"
+        applicationId "com.jpmedia.nutricare"
         minSdk 21
         targetSdk 34
         versionCode 1

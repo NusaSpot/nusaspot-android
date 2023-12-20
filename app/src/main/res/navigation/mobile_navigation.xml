@@ -8,25 +8,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.jpmedia.nusaspot.ui.home.HomeFragment"
+        android:name="com.jpmedia.nutricare.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_deteksi"
-        android:name="com.jpmedia.nusaspot.ui.deteksi.DeteksiFragment"
+        android:name="com.jpmedia.nutricare.ui.deteksi.DeteksiFragment"
         android:label="@string/title_deteksi"
         tools:layout="@layout/fragment_deteksi" />
 
     <fragment
         android:id="@+id/navigation_ahli_gizi"
-        android:name="com.jpmedia.nusaspot.ui.ahligizi.AhliGiziFragment"
+        android:name="com.jpmedia.nutricare.ui.ahligizi.AhliGiziFragment"
         android:label="@string/title_ahli_gizi"
         tools:layout="@layout/fragment_ahli_gizi" />
 
     <fragment
         android:id="@+id/navigation_user"
-        android:name="com.jpmedia.nusaspot.ui.user.UserFragment"
+        android:name="com.jpmedia.nutricare.ui.user.UserFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_ahli_gizi" />
 </navigation>
