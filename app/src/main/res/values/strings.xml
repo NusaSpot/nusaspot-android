@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nusa Spot</string>
+    <string name="app_name">NutriCare</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
