@@ -30,9 +30,10 @@ class NewPasswordActivity : AppCompatActivity() {
             if (email != null && binding.edtPwd.text.isNotBlank() && binding.edtPwdConf.text.isNotBlank()) {
                 resetPassword(email)
             } else {
+                showProgressBar(false)
                 Toast.makeText(
                     this@NewPasswordActivity,
-                    "Email or password fields cannot be empty",
+                    "data tidak boleh kosong",
                     Toast.LENGTH_SHORT
                 ).show()
             }

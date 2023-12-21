@@ -29,7 +29,7 @@
         android:id="@+id/textHealthCondition"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Your Body Health Condition is"
+        android:text="Kondisi Tubuhmu"
         android:textColor="@color/primaryTextColor"
         android:textSize="25dp"
         android:textStyle="bold"

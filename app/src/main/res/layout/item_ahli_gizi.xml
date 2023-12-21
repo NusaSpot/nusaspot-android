@@ -59,7 +59,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:paddingStart="11dp"
-            android:text="Jorem ipsum dolor, consectetur adipiscing elit. Nunc v libero et velit interdum, ac  mattis."
+            android:text="Ahli Gizi"
             android:maxLines="4"
             android:textColor="@color/grey"
             android:textSize="12sp"

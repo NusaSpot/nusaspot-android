@@ -30,6 +30,7 @@ class ResetPasswordActivity : AppCompatActivity() {
             if (email.isNotEmpty()) {
                 requestOtp(email)
             } else {
+                showProgressBar(false)
                 Toast.makeText(this, "Email tidak boleh kosong", Toast.LENGTH_SHORT).show()
             }
         }
@@ -62,6 +63,7 @@ class ResetPasswordActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                showProgressBar(false)
                 t.message?.let { Log.e("error", it) }
             }
         })

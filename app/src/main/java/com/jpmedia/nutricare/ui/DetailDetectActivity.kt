@@ -58,8 +58,6 @@ class DetailDetectActivity : AppCompatActivity() {
         authToken = sharedPreferences.getString("token", null)
         val detectId = intent.getStringExtra("DETECT_ID")
         detailAdapter.setOnDeleteButtonClickListener { detectId, id ->
-
-            Toast.makeText(this, "${detectId},${id}", Toast.LENGTH_SHORT).show()
             if (authToken != null) {
                 val apiService = Retro().getRetroClientInstance().create(UserApi::class.java)
                 apiService.deleteDetect("Bearer $authToken", detectId, id)
@@ -149,7 +147,6 @@ class DetailDetectActivity : AppCompatActivity() {
                     .get(DetectDetailViewModel::class.java)
             detectDetailViewModel.fetchDetail(detectId, "Bearer $authToken".orEmpty())
             detectDetailViewModel.detectDetailData.observe(this, { detailDataList ->
-                // Perbarui adapter RecyclerView dengan data terbaru
                 detailAdapter.updateData(detailDataList, status)
             })
         } else {

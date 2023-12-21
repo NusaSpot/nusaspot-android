@@ -196,7 +196,7 @@ class EditProfilActivity : AppCompatActivity() {
                 })
         } ?: run {
             showLoading(false)
-            Toast.makeText(this, "Pilih gambar terlebih dahulu", Toast.LENGTH_SHORT).show()
+
         }
     }
 

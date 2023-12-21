@@ -92,7 +92,8 @@ class DeteksiFragment : Fragment() {
                             detectId = data.id.toString()
                         }
                     } else {
-                        Toast.makeText(requireContext(), "Detect start failed: ${response.code()}", Toast.LENGTH_SHORT).show()
+                       showLoading(false)
+
                     }
                 }
 
@@ -126,6 +127,7 @@ class DeteksiFragment : Fragment() {
                     ) {
                         showLoading(false)
                         if (response.isSuccessful) {
+                            currentImageUri = null
                             showInitialImageState()
                             val intent = Intent(requireActivity(), DetailDetectActivity::class.java)
                             intent.putExtra("DETECT_ID", detectId)
@@ -159,7 +161,8 @@ class DeteksiFragment : Fragment() {
             }
         } ?: run {
             showLoading(false)
-            Toast.makeText(requireContext(), "Pilih gambar terlebih dahulu", Toast.LENGTH_SHORT).show()
+
+
         }
     }
 
@@ -182,7 +185,6 @@ class DeteksiFragment : Fragment() {
     }
 
     private fun showInitialImageState() {
-      //  binding.previewImageView.setImageURI(null)
         binding.previewImageView.setImageResource(R.drawable.placeholder_image)
     }
 

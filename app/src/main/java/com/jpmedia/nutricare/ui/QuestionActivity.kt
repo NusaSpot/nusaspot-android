@@ -38,7 +38,8 @@ class QuestionActivity : AppCompatActivity() {
         val weight = binding.editBB.text.toString().trim()
 
         if (height.isEmpty() || weight.isEmpty()) {
-            Toast.makeText(applicationContext, "Isi semua field", Toast.LENGTH_SHORT).show()
+            showProgressBar(false)
+            Toast.makeText(applicationContext, "data tidak boleh kosong", Toast.LENGTH_SHORT).show()
             return
         }
 
